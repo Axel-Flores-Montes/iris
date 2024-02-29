@@ -1,5 +1,6 @@
 # Paso 1: Importar las bibliotecas necesarias
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -30,6 +31,12 @@ y_pred = knn_classifier.predict(X_test_scaled)
 # Paso 7: Evaluar el modelo
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
+
+# Paso 8: graficando datos
+plt.title("Gráfica ")
+plt.xlabel("sepal length (cm)")
+plt.ylabel("sepal width (cm)")
+plt.scatter(X[0], X[1])
 
 # Paso 9: Realizar predicciones para nuevos datos (opcional)
 # Por ejemplo, puedes predecir la clase de una flor con características específicas
