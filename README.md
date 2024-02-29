@@ -1,0 +1,39 @@
+# Paso 1: Importar las bibliotecas necesarias
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# Paso 2: Cargar el conjunto de datos de iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Paso 3: Dividir los datos en conjuntos de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Paso 4: Escalar los datos
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Paso 5: Entrenar el modelo KNN
+k = 3
+knn_classifier = KNeighborsClassifier(n_neighbors=k)
+knn_classifier.fit(X_train_scaled, y_train)
+
+# Paso 6: Predecir utilizando el modelo entrenado
+y_pred = knn_classifier.predict(X_test_scaled)
+
+# Paso 7: Evaluar el modelo
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+# Paso 9: Realizar predicciones para nuevos datos (opcional)
+# Por ejemplo, puedes predecir la clase de una flor con características específicas
+new_data = [[7.0, 3.2, 4.7, 1.4]]  # Inserta las características de la flor aquí
+new_data_scaled = scaler.transform(new_data)
+predicted_class = knn_classifier.predict(new_data_scaled)
+print("\nPredicted class for new data:", iris.target_names[predicted_class[0]])
